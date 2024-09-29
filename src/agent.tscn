@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsxpbdithh81i"]
+
+[ext_resource type="Script" path="res://CarAgent.gd" id="1_7yu7i"]
+[ext_resource type="Script" path="res://CarMovement.gd" id="2_ij8wa"]
+[ext_resource type="Texture2D" uid="uid://bj1x1k10b4n4m" path="res://icon.svg" id="3_ikayt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnmsc"]
+size = Vector2(30, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_15fnn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgtrd"]
+size = Vector2(22, 32)
+
+[node name="Agent" type="Node2D"]
+position = Vector2(514, 657)
+script = ExtResource("1_7yu7i")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+rotation = -1.5708
+collision_layer = 0
+script = ExtResource("2_ij8wa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_tnmsc")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/CollisionShape2D"]
+position = Vector2(4.76837e-07, 1.90735e-06)
+rotation = 1.5708
+scale = Vector2(0.15625, 0.234375)
+texture = ExtResource("3_ikayt")
+
+[node name="Raycasts" type="Node2D" parent="CharacterBody2D"]
+position = Vector2(5, 0)
+rotation = 0.785398
+
+[node name="RayCast2D" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+target_position = Vector2(0, -500)
+collide_with_areas = true
+
+[node name="RayCast2D3" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+rotation = 0.261799
+target_position = Vector2(0, -500)
+collide_with_areas = true
+
+[node name="RayCast2D5" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+rotation = 0.523599
+target_position = Vector2(0, -500)
+collide_with_areas = true
+
+[node name="RayCast2D7" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+rotation = 0.785398
+target_position = Vector2(0, -500)
+collide_with_areas = true
+
+[node name="RayCast2D9" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+rotation = 1.0472
+target_position = Vector2(0, -500)
+collide_with_areas = true
+
+[node name="RayCast2D11" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+rotation = 1.309
+target_position = Vector2(0, -500)
+collide_with_areas = true
+
+[node name="RayCast2D13" type="RayCast2D" parent="CharacterBody2D/Raycasts"]
+rotation = 1.5708
+target_position = Vector2(0, -500)
+collide_with_areas = true
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+shape = SubResource("CircleShape2D_15fnn")
+
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
+scale = Vector2(0.92, 1)
+shape = SubResource("RectangleShape2D_lgtrd")
+
+[connection signal="body_shape_entered" from="CharacterBody2D/Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_entered" from="CharacterBody2D/Area2D2" to="." method="_on_area_2d_2_body_shape_entered"]
