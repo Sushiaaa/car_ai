@@ -29,6 +29,7 @@ func _process(delta):
 				network.layers[0][i].value = raycasts[i].global_position.distance_to(raycasts[i].get_collision_point())/500;
 			else:
 				network.layers[0][i].value = 1;
+		network.layers[0][-1].value = car.velocity.length()/500;
 		network.forward_prop();
 			
 		var output_values = [0.0, 0.0, 0.0, 0.0];
